@@ -46,13 +46,23 @@ main{
     color: #FFFFFF;
     font-size: 10px;
     font-family: 'Press Start 2P', cursive;
-
+    display: flex;
+    justify-content: space-between;
+}
+.tituloRonda h2 span{
+    display: flex;
+    justify-content: center;
 }
 
 .mesa{
     height: 60%;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.mesa h2{
+    font-family: 'Press Start 2P', cursive;
+    color: #FFFFFF;
 }
 
 .contenedor{
@@ -69,7 +79,7 @@ main{
 }
 
 .tarjeta{
-    background-color: lightblue;
+    background-color: #2F2C79;
     width: 30%;
     height: 95%;
 }
