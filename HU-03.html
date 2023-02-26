@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego Piedra, Papel o Tijera</title>
+    <link rel="stylesheet" href="css/HU-03.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="titulo">
+            <h1>Juego de Piedra, Papel o Tijera</h1>
+        </div>
+    </header>
+    <main>
+        <!--Juego-->
+        <div class="juego">
+            <div class="tituloRonda">
+                <h2>Ronda 1 de 5</h2>
+                <h2><span>Tiempo restante</span><span>0:03</span></h2>
+            </div>
+            <div class="mesa">
+                <div class="contenedor"> 
+                    <div class="contenedor-tarjeta">
+                        <div class="tarjeta"><img src="imagenes/piedraF.jpg" alt=""></div>
+                        <div class="tituloGanoPerdio">
+                            <h2>Ganaste</h2>
+                        </div>
+                        <div class="tarjeta"><img src="imagenes/tijeraF.jpg" alt=""></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tablaRonda">
+                <table>
+                    <th></th>
+                    <th>Ronda 1</th>
+                    <th>Ronda 2</th>
+                    <th>Ronda 3</th>
+                    <th>Ronda 4</th>
+                    <th>Ronda 5</th>
+                    <tr class="oscuro">
+                        <td class="borde">Jugador</td>
+                        <td>X</td>
+                        <td></td>
+                        <td></td>
+                        <td>X</td>
+                        <td>X</td>
+                    </tr>
+                    <tr class="oscuro">
+                        <td class="borde">Máquina</td>
+                        <td></td>
+                        <td>X</td>
+                        <td>X</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!--Tabla de las rondas-->
+        <div class="contenedorPuntos">
+            <div class="tablaPuntuacion">
+                <h3>Mejores Puntuaciones</h3>
+                <table>
+                    <th>Jugador</th>
+                    <th>Puntos</th>
+                    <tr class="oscuro">
+                        <td>ElMasPerron</td>
+                        <td>3</td>
+                    </tr>
+                    <tr class="claro">
+                        <td>CacahuatesConSalsa</td>
+                        <td>3</td>
+                    </tr>
+                    <tr class="oscuro">
+                        <td>TangaDPerro</td>
+                        <td>2</td>
+                    </tr>
+                    <tr class="claro">
+                        <td>TamalDVerde</td>
+                        <td>2</td>
+                    </tr>
+                    <tr class="oscuro">
+                        <td>Animalote</td>
+                        <td>1</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="puntuacion"></div>
+        </div>
+
+    </main>
+</body>
+
+</html>
