@@ -1,0 +1,202 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: #2F2C79;
+    width: 100vw; /*100% view for width*/
+    height: 100vh; /*100% view for height*/
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    height: 25%;
+}
+
+.titulo{
+    display: flex;
+    justify-content: center;
+    margin-top: 9vh;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.titulo h1{
+    color: #FFD700;
+    border: 3px dashed #FFD700;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+main{
+    height: 75%;
+    display: flex;
+    flex-direction: row;
+}
+
+.juego{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tituloRonda{
+    height: 10%;
+    color: #FFFFFF;
+    font-size: 10px;
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    justify-content: space-between;
+}
+.tituloRonda h2 span{
+    display: flex;
+    justify-content: center;
+}
+
+.mesa{
+    height: 60%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.mesa h2{
+    font-family: 'Press Start 2P', cursive;
+    color: #FFFFFF;
+}
+
+.contenedor{
+    height: 70%;
+    width: 60%;
+    margin-top: 6vh;
+}
+
+.contenedor-tarjeta{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.tituloGanoPerdio{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tituloGanoPerdio p{
+    display: flex;
+    color: #FFFFFF;
+    margin-top: 10px;
+}
+
+.tituloGanoPerdio p span{
+    font-weight: bolder;
+    font-style: italic;
+}
+
+.tituloGanoPerdio button{
+    background-color: #FFFFFF;
+    color: #2D2C55;
+    font-size: 16px;
+    padding: 8px 16px;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+
+.tarjeta{
+    background-color: #2F2C79;
+    width: 30%;
+    height: 95%;
+}
+
+.tarjeta img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.tablaRonda{
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10vh;
+}
+
+.tablaRonda table{
+    color: #FFD700;
+}
+
+.tablaRonda table th:nth-child(2), th:nth-child(3), th:nth-child(4), th:nth-child(5), th:nth-child(6){
+    border: 2px solid #FFFFFF;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+}
+
+.oscuro{
+    background-color: #2D2C55;
+    color: #FFFFFF;
+}
+.claro{
+    background-color: #302C9B;
+}
+.borde{
+    border: 2px solid #FFFFFF;
+    background-color: #2F2C79;
+    color: #FFD700;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+}
+td{
+    text-align: center;
+    padding: 5px;
+}
+
+.contenedorPuntos{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tablaPuntuacion{
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.tablaPuntuacion table td{
+    text-align: start;
+}
+
+.tablaPuntuacion table td:nth-child(2){
+    text-align: end;
+}
+
+h3{
+    height: 7vh;
+    text-align: center;
+    color: #FFFFFF;
+    border: outset #FFD700;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: smaller;
+}
+
+/*Puntuación de la HU-04*/
+.puntuacion{
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.puntuacion p{
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
