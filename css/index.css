@@ -155,3 +155,43 @@ h3{
     height: 20%;
 }
 
+form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+} 
+/*cambiar a pixeles(px) las medidas*/
+input[type=text] {
+    color: #2f2c79;
+    text-align: center;
+    width: 50vw;
+    height: 2vw;
+    border-radius: 4px;
+    font-family: 'Press Start 2P', cursive;
+}
+input[type=submit]:enabled {
+    font-size: smaller;
+    font-family: 'Press Start 2P', cursive;
+    border-radius: 4px;
+    width: 30vw;
+    height: 10vh;
+    background-color: #2f2c79;
+    color: white;
+    cursor: pointer; 
+}
+input[type=submit]:disabled {
+    font-size: smaller;
+    font-family: 'Press Start 2P', cursive;
+    border-radius: 4px;
+    width: 30vw;
+    height: 10vh;
+    background-color: #808080;
+    color: #ffffff;  
+}
+
+input[type=submit]:hover:enabled {
+    background-color: #2f2c82;
+} 

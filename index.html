@@ -10,53 +10,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="js/index.js"></script>
 </head>
 
 <body>
     <header>
         <div class="titulo">
-            <h1>Juego de Piedra</h1>
+            <h1>Juego de Piedra, Papel o Tijera</h1>
         </div>
     </header>
     <main>
         <!--Juego-->
         <div class="juego">
+            
             <div class="tituloRonda">
-                <h2>Ronda 1 de 5</h2>
+            
             </div>
             <div class="mesa">
+                
                 <div class="contenedor"> 
+                    
                     <div class="contenedor-tarjeta">
-                        <div class="tarjeta"><img src="" alt=""></div>
-                        <div class="tarjeta"><img src="" alt=""></div>
-                        <div class="tarjeta"><img src="" alt=""></div>
-                    </div>
-                </div>
+                        <form name="form">
+                            <input type="text" name="fname" onkeyup="Nombre.validarNombre()" id="mensaje" placeholder="Ingresa tu nombre de jugador" minlength="4" maxlength="16" required/>
+                            <input type="submit" id="enviar" onclick="Nombre.iniciarJuego()" Value="Iniciar el juego" disabled/>
+                        </form>
+                    </div> 
+            </div>
             </div>
             <div class="tablaRonda">
                 <table>
-                    <th></th>
-                    <th>Ronda 1</th>
-                    <th>Ronda 2</th>
-                    <th>Ronda 3</th>
-                    <th>Ronda 4</th>
-                    <th>Ronda 5</th>
-                    <tr class="oscuro">
-                        <td class="borde">Jugador</td>
-                        <td>X</td>
-                        <td></td>
-                        <td></td>
-                        <td>X</td>
-                        <td>X</td>
-                    </tr>
-                    <tr class="oscuro">
-                        <td class="borde">Máquina</td>
-                        <td></td>
-                        <td>X</td>
-                        <td>X</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+
                 </table>
             </div>
         </div>
@@ -89,10 +73,11 @@
                     </tr>
                 </table>
             </div>
-            <div class="puntuacion"></div>
+            <div class="puntuacion"></div>puntuacion
         </div>
 
     </main>
+    
 </body>
 
 </html>
