@@ -1,45 +1,35 @@
 // Presentación
-class controladorIngresarJugador
-{
-    constructor()
-    {
-    
-    }
-
-
-}
 
 // Negocio
 class Jugador 
 {
-    constructor(nombre)
+    constructor()
     {
-    this.nombre = '';
+    this.id ;
+    this.nombre ;
     this.puntos ;
     this.eleccion ;
-    this.totalRondas ;
-
-    console.log ("constructor: " + nombre);
     }
 
-        setJugador(jugador) 
+        setJugador() 
         {
-        this.nombre = jugador;
-        console.log ( 'setjugador : ' + jugador )
+        this.nombre = document.getElementById ("mensaje").value;
+        console.log ( 'setjugador : ' + this.nombre );
         }
 
         getJugador()
         {
         return this.nombre;
+        
         }
 } 
 
 
 class servicioJugador 
 {
-    constructor(){
-        this.repositorioJugador ;
-        this.jugador ;
+    constructor(repositorio , Nombre){
+        this.repositorioJugador = repositorio ;
+        this.jugador = Nombre;
     }
 
     validarNombre()
@@ -61,44 +51,47 @@ class servicioJugador
 
     iniciarJuego()
     {
-        let nombre = document.getElementById ("mensaje").value;
-        console.log("nombreclick :" + nombre);
-        sessionStorage.setItem('nombre' , nombre);
-    }
+        this.jugador.setJugador();
+        this.repositorioJugador.guardarJugador( this.jugador.getJugador() );
+        this.repositorioJugador.show();
 
-    crearJugador( jugador ) 
-    {
-        //Jugador.setJugador() ;
-        console.log("el jugador es:" + jugador);
-        sessionStorage.setItem("jugador" , jugador);
     }
-
 }
 
 
 //datos
 
-class repositorioJugador
+class RepositorioJugador
 {
     constructor()
     {
-    this.baseDatos = [];
+    
+    this.jugador = [];
     }
 
-    crearJugador(valor){
-    sessionStorage.setItem('Jugador' , valor);
+    guardarJugador(nombre){
+        sessionStorage.setItem("jugador" , nombre);
+        let juga = nombre;
+        this.jugador.push ( juga );
+        
     return true;
+    }
+
+    show()
+    {
+    console.log("el jugador es:" + this.jugador);
     }
 }
 
 //inicio
 
-let Nombre = new servicioJugador();
 
-let nombre = sessionStorage.getItem('nombre');
+let Validar = new servicioJugador();
 
-let jugador = new Jugador ( nombre );
-jugador.setJugador ( nombre );
+let Nombre = new Jugador ();
+let repositorio = new RepositorioJugador();
 
-let servicio = new servicioJugador ();
-servicio.crearJugador( jugador.getJugador());
+let nombre = new servicioJugador (repositorio , Nombre);
+
+
+
