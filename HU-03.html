@@ -23,16 +23,16 @@
         <div class="juego">
             <div class="tituloRonda">
                 <h2>Ronda 1 de 5</h2>
-                <h2><span>Tiempo restante</span><span>0:03</span></h2>
+                <h2><span>Tiempo restante</span><span id="actualizaTiempo">0:03</span></h2>
             </div>
             <div class="mesa">
                 <div class="contenedor"> 
                     <div class="contenedor-tarjeta">
-                        <div class="tarjeta"><img src="imagenes/piedraF.jpg" alt=""></div>
+                        <div class="tarjeta" id="imagenJugador"><img src="imagenes/piedraF.jpg" alt=""></div>
                         <div class="tituloGanoPerdio">
-                            <h2>Ganaste</h2>
+                            <h2 id="resultadoTexto">Ganaste</h2>
                         </div>
-                        <div class="tarjeta"><img src="imagenes/tijeraF.jpg" alt=""></div>
+                        <div class="tarjeta" id="imagenMaquina"><img src="imagenes/tijeraF.jpg" alt=""></div>
                     </div>
                 </div>
             </div>
@@ -94,8 +94,8 @@
             </div>
             <div class="puntuacion"></div>
         </div>
-
     </main>
+    <script src="js/HU-03.js"></script>
 </body>
 
 </html>
