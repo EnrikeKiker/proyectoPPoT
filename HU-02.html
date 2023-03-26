@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego Piedra, Papel o Tijera</title>
-    <link rel="stylesheet" href="css/rondaEleccion.css">
+    <link rel="stylesheet" href="css/HU-02.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -22,16 +22,16 @@
         <!--Juego-->
         <div class="juego">
             <div class="tituloRonda">
-                <h2>Ronda 1 de 5</h2>
-                <h2><span>Tiempo restante</span><span>0:05</span></h2>
+                <h2 id="rondas">Ronda 1 de 5</h2>
+                <h2><span>Tiempo restante</span><span id="cuentaReg">0:05</span></h2>
             </div>
             <div class="mesa">
                 <h2>Elige tu opción</h2>
                 <div class="contenedor"> 
-                    <div class="contenedor-tarjeta">
-                        <div class="tarjeta"><img src="images/papel.jpg" alt="Papel"></div>
-                        <div class="tarjeta"><img src="images/piedra.jpg" alt="Piedra"></div>
-                        <div class="tarjeta"><img src="images/tijeras.jpg" alt="Tijeras"></div>
+                    <div id="contenedorImagen" class="contenedor-tarjeta">
+                        <div class="tarjeta"><button id="piedra" onclick="controladorRondaEleccion.seleccionJugador('piedra')" value="piedra"><img src="imagenes/piedraF.jpg" alt="Piedra"></button></div>
+                        <div class="tarjeta"><button id="papel" onclick="controladorRondaEleccion.seleccionJugador('papel')" value="papel"><img src="imagenes/papelF.jpg" alt="Papel"></button></div>
+                        <div class="tarjeta"><button id="tijera" onclick="controladorRondaEleccion.seleccionJugador('tijera')" value="tijeras"><img src="imagenes/tijeraF.jpg" alt="Tijera"></button></div>
                     </div>
                 </div>
             </div>
@@ -45,19 +45,19 @@
                     <th>Ronda 5</th>
                     <tr class="oscuro">
                         <td class="borde">Jugador</td>
-                        <td>X</td>
-                        <td></td>
-                        <td></td>
-                        <td>X</td>
-                        <td>X</td>
+                        <td id="jugadorPosicion-0"></td>
+                        <td id="jugadorPosicion-1"></td>
+                        <td id="jugadorPosicion-2"></td>
+                        <td id="jugadorPosicion-3"></td>
+                        <td id="jugadorPosicion-4"></td>
                     </tr>
                     <tr class="oscuro">
                         <td class="borde">Máquina</td>
-                        <td></td>
-                        <td>X</td>
-                        <td>X</td>
-                        <td></td>
-                        <td></td>
+                        <td id="maquinaPosicion-0"></td>
+                        <td id="maquinaPosicion-1"></td>
+                        <td id="maquinaPosicion-2"></td>
+                        <td id="maquinaPosicion-3"></td>
+                        <td id="maquinaPosicion-4"></td>
                     </tr>
                 </table>
             </div>
@@ -95,6 +95,7 @@
         </div>
 
     </main>
+    <script src="js/HU-02.js"></script>
 </body>
 
 </html>
