@@ -7,25 +7,34 @@ class ControladorRondaResultado{
     }
 //Realiza el proceso de calcular elección inyectando la dependencia el servicio para su referencia
     iniciaCalcularEleccion(){
-        let respuesta = this.servicioJugador.calcularEleccion();
+        this.tiempoRestante();
+        let respuesta = servicioJugador.calcularEleccion();
         if(respuesta == true){
-            this.verificarUltimaRonda();
+            if(this.verificarUltimaRonda() == true){
+                console.log('No ha terminado el juego');
+            }
+            else{
+                console.log('Error: No se ha podido completar el juego');
+            }
         }
-        else{
-            console.log('Error: No se pudo calcular la elección');
-            //llamada a vista
-        }
-    }
-    calcularEleccion(){
-
     }
 //Comprueba la ronda final para en vez de cambiar a la vista RondaEleccion pase a la vista RondaResultado
     verificarUltimaRonda(){
-        let ronda = 1;
-        
-        return true;
+        let ronda;
+        ronda = parseInt(sessionStorage.getItem('totalRondas')) || 0;
+        console.log(ronda);
+        if(ronda < 5){
+            ronda++;
+            console.log(ronda);
+            document.getElementById('rondas').innerHTML = `Ronda ${ronda} de 5`;
+            sessionStorage.setItem('totalRondas',ronda);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-//temporizador de 3 segundos
+//Llama al temporizador de 3 segundos
     tiempoRestante(){
         setTimeout(this.calcularTiempoRestante,1);
     }
@@ -34,6 +43,8 @@ class ControladorRondaResultado{
         let segundos, repetir;
         let actualizaTiempo = document.getElementById('actualizaTiempo');
         console.log(actualizaTiempo);
+        let comprobarUltimaRonda = parseInt(sessionStorage.getItem('totalRondas')) || 0;
+        console.log(comprobarUltimaRonda);
         function iniciarTiempo(){
             ponerTiempo();
             conteoRegresivo();
@@ -45,16 +56,23 @@ class ControladorRondaResultado{
             repetir = setInterval(calcularTiempo,1000);
         }
         function calcularTiempo(){
-            if(segundos > 0){
+            if(segundos >= 0){
                 console.log(segundos);
-                --segundos;
                 actualizaTiempo.innerHTML = `0:0${segundos}`;
+                --segundos;
             }
             else{
                 //Me lleva a la vista RondaEleccion o vista de Partida Finalizada
                 clearInterval(repetir);
                 console.log('Cambia a otra vista');
-                alert('Cambia de vista');
+                if(comprobarUltimaRonda < 5){
+                    location.href = 'HU-02.html';
+                    console.log('cambia a vista 2 No.Ronda:'+comprobarUltimaRonda)
+                }
+                else{
+                    location.href = 'HU-04.html';
+                }
+                
             }
         }
         iniciarTiempo();
@@ -92,14 +110,84 @@ class ServicioJugador{
         }
         return resultado;
     }
-//Otorga la puntuación correspondiente si gano(1 punto) o perdio(0 puntos) el jugador
+//Otorga la puntuación correspondiente si ganó(1 punto), si perdió o empato(0 puntos) el jugador
     otorgarPuntuacion(resultado){
-        let puntos = 0;
+        let puntos;
         if(resultado == 'Ganaste'){
             puntos = 1;
+        }else if(resultado == 'Perdiste'){
+            puntos = 0;
         }
         console.log('Puntos que obtuvo: '+puntos);
         return puntos;
+    }
+    //Actualiza la tabla de las rondas jugadas
+    actualizarTablaRonda(resultado){
+        let tablaRondasJugador = [];
+        let tablaRondasMaquina = [];
+        tablaRondasJugador = JSON.parse(sessionStorage.getItem('tablaRondasJugador')) || [];
+        tablaRondasMaquina = JSON.parse(sessionStorage.getItem('tablaRondasMaquina')) || [];
+        if(resultado == 'Ganaste'){
+            tablaRondasJugador.push('X');
+            tablaRondasMaquina.push('');
+            sessionStorage.setItem('tablaRondasJugador',JSON.stringify(tablaRondasJugador));
+            sessionStorage.setItem('tablaRondasMaquina',JSON.stringify(tablaRondasMaquina));
+        }
+        else{
+            tablaRondasJugador.push('');
+            tablaRondasMaquina.push('X');
+            sessionStorage.setItem('tablaRondasJugador',JSON.stringify(tablaRondasJugador));
+            sessionStorage.setItem('tablaRondasMaquina',JSON.stringify(tablaRondasMaquina));
+        }
+        function actualizarVista(){
+            //Actualiza la tabla de html del jugador
+            document.getElementById('jugadorPosicion-0').innerHTML = (tablaRondasJugador[0]===undefined) ? '' :tablaRondasJugador[0];
+            document.getElementById('jugadorPosicion-1').innerHTML = (tablaRondasJugador[1]===undefined) ? '' :tablaRondasJugador[1];
+            document.getElementById('jugadorPosicion-2').innerHTML = (tablaRondasJugador[2]===undefined) ? '' :tablaRondasJugador[2];
+            document.getElementById('jugadorPosicion-3').innerHTML = (tablaRondasJugador[3]===undefined) ? '' :tablaRondasJugador[3];
+            document.getElementById('jugadorPosicion-4').innerHTML = (tablaRondasJugador[4]===undefined) ? '' :tablaRondasJugador[4];
+            //Actualiza la tabla de html de la máquina
+            document.getElementById('maquinaPosicion-0').innerHTML = (tablaRondasMaquina[0]===undefined) ? '' :tablaRondasMaquina[0];
+            document.getElementById('maquinaPosicion-1').innerHTML = (tablaRondasMaquina[1]===undefined) ? '' :tablaRondasMaquina[1];
+            document.getElementById('maquinaPosicion-2').innerHTML = (tablaRondasMaquina[2]===undefined) ? '' :tablaRondasMaquina[2];
+            document.getElementById('maquinaPosicion-3').innerHTML = (tablaRondasMaquina[3]===undefined) ? '' :tablaRondasMaquina[3];
+            document.getElementById('maquinaPosicion-4').innerHTML = (tablaRondasMaquina[4]===undefined) ? '' :tablaRondasMaquina[4];
+        }
+        actualizarVista();
+    }
+    //Hace el proceso del juego en la secuencia correcta
+    calcularEleccion(){
+        //Recuperar el objeto jugador
+        this.arregloJugador = JSON.parse(sessionStorage.getItem('DatosJugadores')) || [];
+        let recuperarUltimoID = this.arregloJugador.length-1;
+        let jugadorRecuperado = repositorioObjetos.recuperarJugador(recuperarUltimoID);
+        //Obtiene e muestra la elección del jugador
+        let eleccionJugador = jugadorRecuperado.eleccion;
+        let imagenJugador = document.getElementById('imagenJugador');
+        imagenJugador.innerHTML = `<img src="imagenes/${eleccionJugador}F.jpg" alt="">`;
+        //Obtiene e muestra la elección de la máquina
+        let eleccionMaquina = this.crearEleccionMaquina();
+        let imagenMaquina = document.getElementById('imagenMaquina');
+        imagenMaquina.innerHTML = `<img src="imagenes/${eleccionMaquina}F.jpg" alt="">`;
+        //Compara y muestra el resultado de la partida
+        let resultado = this.compararElecciones(eleccionJugador,eleccionMaquina);
+        this.actualizarTablaRonda(resultado);
+        let resultadoRonda = document.getElementById('resultadoTexto');
+        resultadoRonda.innerHTML = resultado;
+        //Pone una puntuación al resultado
+        let puntos = this.otorgarPuntuacion(resultado);
+        // this.arregloJugador = JSON.parse(sessionStorage.getItem('DatosJugadores')) || [];
+        // let recuperarUltimoID = this.arregloJugador.length-1;
+        // let jugadorRecuperado = repositorioObjetos.recuperarJugador(recuperarUltimoID);//No debería de pasar nada tendría que ser vacío para recuperar el último jugadro osea el jugador activo
+        //Incrementa los puntos de cada ronda
+        let puntosActualizados = (jugadorRecuperado.puntos || 0) + puntos;
+        //Guarda los puntos en el respectivo jugador
+        jugadorRecuperado.setPuntos(puntosActualizados);
+        jugadorRecuperado.setEleccion(eleccionJugador);
+        console.log(jugadorRecuperado);
+
+        repositorioObjetos.actualizarJugador(jugadorRecuperado);
+        return true;
     }
 }
 
@@ -223,33 +311,17 @@ let jugador1 = new Jugador ('CacahuetesConSalsa',2,'piedra');
 let jugador2 = new Jugador ('TangaDPerro',2,'piedra');
 let jugador3 = new Jugador ('TamalDVerde',2,'piedra');
 let jugador4 = new Jugador ('Animalote',2,'piedra');
-let jugador5 = new Jugador ('ReKga2');
+
 repositorioObjetos.crearJugador(jugador0);
 repositorioObjetos.crearJugador(jugador1);
 repositorioObjetos.crearJugador(jugador2);
 repositorioObjetos.crearJugador(jugador3);
 repositorioObjetos.crearJugador(jugador4);
 repositorioObjetos.crearJugador(jugador4);
-repositorioObjetos.crearJugador(jugador5);
 
-let servicio1 = new ServicioJugador();
-let eleccionJugador = servicio1.crearEleccionJugador();
-let imagenJugador = document.getElementById('imagenJugador');
-imagenJugador.innerHTML = `<img src="imagenes/${eleccionJugador}F.jpg" alt="">`;
-let eleccionMaquina = servicio1.crearEleccionMaquina();
-let imagenMaquina = document.getElementById('imagenMaquina');
-imagenMaquina.innerHTML = `<img src="imagenes/${eleccionMaquina}F.jpg" alt="">`;
-let resultado = servicio1.compararElecciones(eleccionJugador,eleccionMaquina);
-console.log(resultado);
-let resultadoRonda = document.getElementById('resultadoTexto');
-resultadoRonda.innerHTML = resultado;
-let puntos = servicio1.otorgarPuntuacion(resultado);
-let jugadorRecuperado = repositorioObjetos.recuperarJugador(5);
-jugadorRecuperado.setPuntos(puntos);
-jugadorRecuperado.setEleccion(eleccionJugador);
-console.log(jugadorRecuperado);
-repositorioObjetos.actualizarJugador(jugadorRecuperado);
 
-//Proceso del controlador
-let controlador1 = new ControladorRondaResultado();
-controlador1.tiempoRestante();
+//Inicia el proceso del Juego
+let servicioJugador = new ServicioJugador();
+//Proceso del controlador cambia entre las vistas del resultado y calcula el tiempo entre cada vista
+let controladorResultados = new ControladorRondaResultado(servicioJugador);
+controladorResultados.iniciaCalcularEleccion();
