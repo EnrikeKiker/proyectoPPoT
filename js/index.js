@@ -2,7 +2,14 @@
 // Presentación
 class ControladorIngresarJugador 
 {
-
+    validaNombre(){
+        servicioJugador.validarNombre();
+        }
+    
+        iniciaJuego(){
+        servicioJugador.iniciarJuego();
+        }
+    
 }
 // Negocio
 class Jugador 
@@ -75,14 +82,18 @@ class ServicioJugador
 
     iniciarJuego()
     {
-
         this.jugador = new Jugador (document.getElementById ("mensaje").value);
         console.log ( this.jugador );
-        
-        this.repositorioJugador.crearJugador( this.jugador );
+        if(repositorioJugador.crearJugador(this.jugador) == false){
+            //Pedirle al usuario que ingrese otro jugador
+            alert('Por favor, elige otro nombre de jugador.');
+        }
+        else{
+            //llamar la vista HU-02 
+            repositorioJugador.crearJugador( this.jugador );
 
+        }
     }
-
 
 }
 
@@ -162,10 +173,24 @@ class RepositorioJugador
 
 }
 
-//inicio
+//Punto de inicio
+//Inicializar repositorio con 5 jugadores
+let repositorioJugador = new RepositorioJugador();
 
-let repositorio = new RepositorioJugador();
+let jugador0 = new Jugador ('ElMasPerron',3,'papel');
+let jugador1 = new Jugador ('CacahuetesConSalsa',2,'piedra');
+let jugador2 = new Jugador ('TangaDPerro',2,'piedra');
+let jugador3 = new Jugador ('TamalDVerde',2,'piedra');
+let jugador4 = new Jugador ('Animalote',2,'piedra');
 
-let nombre = new ServicioJugador ( repositorio );
+repositorioJugador.crearJugador(jugador0);
+repositorioJugador.crearJugador(jugador1);
+repositorioJugador.crearJugador(jugador2);
+repositorioJugador.crearJugador(jugador3);
+repositorioJugador.crearJugador(jugador4);
+repositorioJugador.crearJugador(jugador4);
 
-let controladorIngresarJugador = new ControladorIngresarJugador ( );
+
+let servicioJugador = new ServicioJugador ( repositorioJugador );
+
+let controladorIngresarJugador = new ControladorIngresarJugador ( servicioJugador );
